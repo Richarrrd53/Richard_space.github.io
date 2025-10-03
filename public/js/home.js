@@ -1211,7 +1211,7 @@ function nextBtnCh(i){
     }, 2000);
     setTimeout(() => {
         readmore(i+1);
-    }, 2100);
+    }, 2500);
     setTimeout(() => {
         const menuContainer = document.getElementById("menuContainer");
         menuContainer.style.maskMode = "unset";
