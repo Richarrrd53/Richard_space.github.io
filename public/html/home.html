@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bgText" id="bgText1" class="noto-sans-tc">Richarrrd</div>
+    <div class="bgText" id="bgText2" class="noto-sans-tc">Main Menu</div>
+    <div class="Sections" id="Section1">
+        <div class="sectionContainers" id="homeContainer">
+            <div class="homeItems" id="homeItemImg">
+                <img src="../img/home/profile_removeBG_outline.png" alt="">
+            </div>
+            <div class="homeItems" id="homeItemText">
+                <h1>Welcome to</h1>
+                <h1><span style="color:#0e4081; font-weight: 900;">Richard</span>'s space</h1>
+                <p>Hi!我是資管三黃晟銘，歡迎來到我的攝影作品空間，歡迎您來欣賞我的作品集，期待能夠為您帶來愉悅的體驗。</p>
+                <p style="margin-top: 20px;"><span style="color: #2e2e2e; font-size: 20px;">Hi! I'm Richard, a third-year student in Information Management. Welcome to my photography space. I welcome you to enjoy my portgolio and look forward to bringing you a pleasant exprience.</span></p>
+                <button class="continueBtn">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text" onclick="nextPage(1)">Get Started</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="Sections" id="Section2">
+        <div class="sectionContainers" id="menuContainer">
+            <div id="menuScroller"></div>
+
+            <button class="backBtn" id="backBtn">
+                <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                </span>
+                <span class="button-text" onclick="prevPage(1)">Back</span>
+            </button>
+            <div id="chContainer">
+                <div id="ch_g_1">
+                    <div class="chapters focusedCh" id="ch1">
+                        <div class="ch_bg" id="ch1_bg"></div>
+                        <h1 class="ch_title" id="ch1_title">Series01</h1>
+                        <h2 class="ch_subtitle" id="ch1_subtitle">Black</h2>
+                        <div class="ch_icon" id="ch1_icon"><img src="../img/work/1-1.jpg" alt="系列1"></div>
+                        <button class="btn_close" id="close1">X Close</button>
+                        <h1 class="ch_slide_1" id="ch1_slide_1">Series01</h1>
+                        <h1 class="ch_slide_2" id="ch1_slide_2">Series02</h1>
+                        <button class="ch_btn_next" id="ch_next1">></button>
+                        <div class="readmore_box" id="readmore1">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_2">
+                    <div class="chapters focusedCh" id="ch2">
+                        <div class="ch_bg" id="ch2_bg"></div>
+                        <h1 class="ch_title" id="ch2_title">Series02</h1>
+                        <h2 class="ch_subtitle" id="ch2_subtitle">White</h2>
+                        <div class="ch_icon" id="ch2_icon"><img src="../img/work/2-1.jpg" alt="系列2"></div>
+                        <button class="btn_close" id="close2">X Close</button>
+                        <h1 class="ch_slide_1" id="ch2_slide_1">Series02</h1>
+                        <h1 class="ch_slide_2" id="ch2_slide_2">Series03</h1>
+                        <button class="ch_btn_next" id="ch_next2">></button>
+                        <div class="readmore_box" id="readmore2">
+                            <button class="readmore" ><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_3">
+                    <div class="chapters focusedCh" id="ch3">
+                        <div class="ch_bg" id="ch3_bg"></div>
+                        <h1 class="ch_title" id="ch3_title">Series03</h1>
+                        <h2 class="ch_subtitle" id="ch3_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch3_icon"><img src="../img/work/3-1.jpg" alt="系列3"></div>
+                        <button class="btn_close" id="close3">X Close</button>
+                        <h1 class="ch_slide_1" id="ch3_slide_1">Series03</h1>
+                        <h1 class="ch_slide_2" id="ch3_slide_2">Series04</h1>
+                        <button class="ch_btn_next" id="ch_next3">></button>
+                        <div class="readmore_box" id="readmore3">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_4">
+                    <div class="chapters focusedCh" id="ch4">
+                        <div class="ch_bg" id="ch4_bg"></div>
+                        <h1 class="ch_title" id="ch4_title">Series04</h1>
+                        <h2 class="ch_subtitle" id="ch4_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch4_icon"><img src="../img/work/4-1.jpg" alt="系列4"></div>
+                        <button class="btn_close" id="close4">X Close</button>
+                        <h1 class="ch_slide_1" id="ch4_slide_1">Series04</h1>
+                        <h1 class="ch_slide_2" id="ch4_slide_2">Series05</h1>
+                        <button class="ch_btn_next" id="ch_next4">></button>
+                        <div class="readmore_box" id="readmore4">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_5">
+                    <div class="chapters unfocusCh" id="ch5">
+                        <div class="ch_bg" id="ch5_bg"></div>
+                        <h1 class="ch_title" id="ch5_title">Series05</h1>
+                        <h2 class="ch_subtitle" id="ch5_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch5_icon"><img src="../img/work/5-1.jpg" alt="系列5"></div>
+                        <button class="btn_close" id="close5">X Close</button>
+                        <h1 class="ch_slide_1" id="ch5_slide_1">Series05</h1>
+                        <h1 class="ch_slide_2" id="ch5_slide_2">Series06</h1>
+                        <button class="ch_btn_next" id="ch_next5">></button>
+                        <div class="readmore_box" id="readmore5">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_6">
+                    <div class="chapters unfocusCh" id="ch6">
+                        <div class="ch_bg" id="ch6_bg"></div>
+                        <h1 class="ch_title" id="ch6_title">Series06</h1>
+                        <h2 class="ch_subtitle" id="ch6_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch6_icon"><img src="../img/work/6-1.jpg" alt="系列6"></div>
+                        <button class="btn_close" id="close6">X Close</button>
+                        <h1 class="ch_slide_1" id="ch6_slide_1">Series06</h1>
+                        <h1 class="ch_slide_2" id="ch6_slide_2">Series07</h1>
+                        <button class="ch_btn_next" id="ch_next6">></button>
+                        <div class="readmore_box" id="readmore6">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_7">
+                    <div class="chapters unfocusCh" id="ch7">
+                        <div class="ch_bg" id="ch7_bg"></div>
+                        <h1 class="ch_title" id="ch7_title">Series07</h1>
+                        <h2 class="ch_subtitle" id="ch7_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch7_icon"><img src="../img/work/7-1.jpg" alt="系列7"></div>
+                        <button class="btn_close" id="close7">X Close</button>
+                        <h1 class="ch_slide_1" id="ch7_slide_1">Series07</h1>
+                        <h1 class="ch_slide_2" id="ch7_slide_2">Series08</h1>
+                        <button class="ch_btn_next" id="ch_next7">></button>
+                        <div class="readmore_box" id="readmore7">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_8">
+                    <div class="chapters unfocusCh" id="ch8">
+                        <div class="ch_bg" id="ch8_bg"></div>
+                        <h1 class="ch_title" id="ch8_title">Series08</h1>
+                        <h2 class="ch_subtitle" id="ch8_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch8_icon"><img src="../img/work/8-1.jpg" alt="系列8"></div>
+                        <button class="btn_close" id="close8">X Close</button>
+                        <h1 class="ch_slide_1" id="ch8_slide_1">Series08</h1>
+                        <h1 class="ch_slide_2" id="ch8_slide_2">Series09</h1>
+                        <button class="ch_btn_next" id="ch_next8">></button>
+                        <div class="readmore_box" id="readmore8">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_9">
+                    <div class="chapters" id="ch9">
+                        <div class="ch_bg" id="ch9_bg"></div>
+                        <h1 class="ch_title" id="ch9_title">Series09</h1>
+                        <h2 class="ch_subtitle" id="ch9_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch9_icon"><img src="../img/work/9-1.jpg" alt="系列9"></div>
+                        <button class="btn_close" id="close9">X Close</button>
+                        <h1 class="ch_slide_1" id="ch9_slide_1">Series09</h1>
+                        <h1 class="ch_slide_2" id="ch9_slide_2">Series10</h1>
+                        <button class="ch_btn_next" id="ch_next9">></button>
+                        <div class="readmore_box" id="readmore9">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_10">
+                    <div class="chapters" id="ch10">
+                        <div class="ch_bg" id="ch10_bg"></div>
+                        <h1 class="ch_title" id="ch10_title">Series10</h1>
+                        <h2 class="ch_subtitle" id="ch10_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch10_icon"><img src="../img/work/10-1.jpg" alt="系列10"></div>
+                        <button class="btn_close" id="close10">X Close</button>
+                        <h1 class="ch_slide_1" id="ch10_slide_1">Series10</h1>
+                        <h1 class="ch_slide_2" id="ch10_slide_2">Series11</h1>
+                        <button class="ch_btn_next" id="ch_next10">></button>
+                        <div class="readmore_box" id="readmore10">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_11">
+                    <div class="chapters" id="ch11">
+                        <div class="ch_bg" id="ch11_bg"></div>
+                        <h1 class="ch_title" id="ch11_title">Series11</h1>
+                        <h2 class="ch_subtitle" id="ch11_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch11_icon"><img src="../img/work/11-1.jpg" alt="系列11"></div>
+                        <button class="btn_close" id="close11">X Close</button>
+                        <h1 class="ch_slide_1" id="ch11_slide_1">Series11</h1>
+                        <h1 class="ch_slide_2" id="ch11_slide_2">Series12</h1>
+                        <button class="ch_btn_next" id="ch_next11">></button>
+                        <div class="readmore_box" id="readmore11">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_12">
+                    <div class="chapters" id="ch12">
+                        <div class="ch_bg" id="ch12_bg"></div>
+                        <h1 class="ch_title" id="ch12_title">Series12</h1>
+                        <h2 class="ch_subtitle" id="ch12_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch12_icon"><img src="../img/work/12-1.jpg" alt="系列12"></div>
+                        <button class="btn_close" id="close12">X Close</button>
+                        <h1 class="ch_slide_1" id="ch12_slide_1">Series12</h1>
+                        <h1 class="ch_slide_2" id="ch12_slide_2">Series13</h1>
+                        <button class="ch_btn_next" id="ch_next12">></button>
+                        <div class="readmore_box" id="readmore12">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_13">
+                    <div class="chapters" id="ch13">
+                        <div class="ch_bg" id="ch13_bg"></div>
+                        <h1 class="ch_title" id="ch13_title">Series13</h1>
+                        <h2 class="ch_subtitle" id="ch13_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch13_icon"><img src="../img/work/13-1.jpg" alt="系列13"></div>
+                        <button class="btn_close" id="close13">X Close</button>
+                        <h1 class="ch_slide_1" id="ch13_slide_1">Series13</h1>
+                        <h1 class="ch_slide_2" id="ch13_slide_2">Series14</h1>
+                        <button class="ch_btn_next" id="ch_next13">></button>
+                        <div class="readmore_box" id="readmore13">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_14">
+                    <div class="chapters" id="ch14">
+                        <div class="ch_bg" id="ch14_bg"></div>
+                        <h1 class="ch_title" id="ch14_title">Series14</h1>
+                        <h2 class="ch_subtitle" id="ch14_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch14_icon"><img src="../img/work/14-1.jpg" alt="系列14"></div>
+                        <button class="btn_close" id="close14">X Close</button>
+                        <h1 class="ch_slide_1" id="ch14_slide_1">Series14</h1>
+                        <h1 class="ch_slide_2" id="ch14_slide_2">Series15</h1>
+                        <button class="ch_btn_next" id="ch_next14">></button>
+                        <div class="readmore_box" id="readmore14">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_15">
+                    <div class="chapters" id="ch15">
+                        <div class="ch_bg" id="ch15_bg"></div>
+                        <h1 class="ch_title" id="ch15_title">Series15</h1>
+                        <h2 class="ch_subtitle" id="ch15_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch15_icon"><img src="../img/work/15-1.jpg" alt="系列15"></div>
+                        <button class="btn_close" id="close15">X Close</button>
+                        <h1 class="ch_slide_1" id="ch15_slide_1">Series15</h1>
+                        <h1 class="ch_slide_2" id="ch15_slide_2">Series16</h1>
+                        <button class="ch_btn_next" id="ch_next15">></button>
+                        <div class="readmore_box" id="readmore15">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_16">
+                    <div class="chapters" id="ch16">
+                        <div class="ch_bg" id="ch16_bg"></div>
+                        <h1 class="ch_title" id="ch16_title">Series16</h1>
+                        <h2 class="ch_subtitle" id="ch16_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch16_icon"><img src="../img/work/16-1.jpg" alt="系列16"></div>
+                        <button class="btn_close" id="close16">X Close</button>
+                        <h1 class="ch_slide_1" id="ch16_slide_1">Series16</h1>
+                        <h1 class="ch_slide_2" id="ch16_slide_2">Series17</h1>
+                        <button class="ch_btn_next" id="ch_next16">></button>
+                        <div class="readmore_box" id="readmore16">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ch_g_17">
+                    <div class="chapters" id="ch17">
+                        <div class="ch_bg" id="ch17_bg"></div>
+                        <h1 class="ch_title" id="ch17_title">Series17</h1>
+                        <h2 class="ch_subtitle" id="ch17_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch17_icon"><img src="../img/work/17-1.jpg" alt="系列17"></div>
+                        <button class="btn_close" id="close17">X Close</button>
+                        <h1 class="ch_slide_1" id="ch17_slide_1">Series17</h1>
+                        <h1 class="ch_slide_2" id="ch17_slide_2">Series18</h1>
+                        <button class="ch_btn_next" id="ch_next17">></button>
+                        <div class="readmore_box" id="readmore17">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="ch_g_18">
+                    <div class="chapters" id="ch18">
+                        <div class="ch_bg" id="ch18_bg"></div>
+                        <h1 class="ch_title" id="ch18_title">Series18</h1>
+                        <h2 class="ch_subtitle" id="ch18_subtitle">未命名</h2>
+                        <div class="ch_icon" id="ch18_icon"><img src="../img/work/18-1.jpg" alt="系列18"></div>
+                        <button class="btn_close" id="close18">X Close</button>
+                        <h1 class="ch_slide_1" id="ch18_slide_1">Series17</h1>
+                        <h1 class="ch_slide_2" id="ch18_slide_2">Series18</h1>
+                        <div class="readmore_box" id="readmore18">
+                            <button class="readmore"><span>READ MORE</span><span>></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ch_contents" id="ch_content"></div>
+            <button class="ch_fullscreenBtn" id="ch_fullscreenBtn" onclick="fullscreenCh();">
+                <span class="circle" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                        d="M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z"
+                        ></path>
+                    </svg>
+                </span>
+                <span class="button-text" onclick="">以全螢幕瀏覽照片</span>
+            </button>
+            <div class="fullscrBG" id="fullscrBG"></div>
+            <div class="fullscreenImagesContainer" id="fullscreenImagesContainer">
+                <div class="fullscreenImagesG" id="fullscreenImagesG">
+                    <img class="fullscreenImages" src="../img/work/1-1.jpg" alt="">
+                </div>
+                <div class="fullscreenImagesG" id="fullscreenImagesG2">
+                    <img class="fullscreenImages" src="../img/work/1-1.jpg" alt="">
+                </div>
+            </div>
+            <div id="fullscreenToolContainer">
+                <button class="fullscrCloseBtn" id="fullscrCloseBtn" onclick="exitFullscr();"></button>
+                <button class="fullscrSwitchBtn" id="fullscrNext" onclick="fullscrNextImg();">></button>
+                <button class="fullscrSwitchBtn" id="fullscrPrev" onclick="fullscrPrevImg();">&lt;</button>
+                <div id="fullscrScrollBarBG">
+                    <div id="fullscrScrollBarG">
+                        <div id="fullscrScrollBarContainer">
+    
+                        </div>
+                    </div>
+                    <div id="fullscrPageNum">
+    
+                    </div>
+                </div>
+            </div>
+            <div id="scrollBarBG">
+                <div id="scrollBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/home.js"></script>
+</body>
+</html>
