@@ -693,7 +693,7 @@ button:hover .button-text {
     position: absolute;
     z-index: 8;
     margin-left: 280px;
-    margin-top: 190px;
+    margin-top: 185px;
     display: none;
     opacity: 1;
     transition: all 1s cubic-bezier(.4,0,.2,1);

@@ -1498,38 +1498,86 @@ function nextBtnCh(i){
 }
 
 
-function fullscreenImgLoop(i){
+async function fullscreenImgLoop(i){
     const imgG = document.getElementsByClassName("fullscreenImagesG");
     
     let Max = imgNum[i-1] - 1;
-    imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
-    imgG[1].children[0].src = `../img/work/${tempI}-${(tempN+1)%(Max + 1) + 1}.jpg`;
-    imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
-    imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
-    tempN = (tempN+1)%(Max+1);
-    setTimeout(() => {
+
+    const currentN = tempN;
+    const nextN = (tempN + 1) % (Max + 1);
+    const nextImgUrl = `../img/work/${tempI}-${nextN + 1}.jpg`;
+
+    try{
+        await preloadImage(nextImgUrl);
+
+        imgG[0].children[0].src = `../img/work/${tempI}-${currentN + 1}.jpg`; 
+        imgG[1].children[0].src = nextImgUrl; 
+        imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
+        imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
+
+        tempN = nextN; 
+
+        await new Promise(resolve => {
+            const targetElement = imgG[1].children[0]; 
+
+            const handleAnimationEnd = () => {
+                targetElement.removeEventListener('animationend', handleAnimationEnd); 
+                resolve();
+            };
+
+            targetElement.addEventListener('animationend', handleAnimationEnd);
+        });
+
         imgG[0].children[0].style.animation = "none";
         imgG[1].children[0].style.animation = "none";
         imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
         imgG[1].children[0].src = `../img/work/${tempI}-${(tempN+1)%(Max + 1) + 1}.jpg`;
-    }, 1000);
+        isSwitching = false;
+    }
+    catch (error){
+        console.error("自動輪播圖片載入失敗:", error.message);
+    }
 }
 
-function endingImgLoop(i){
+async function endingImgLoop(i){
     const imgG = document.getElementsByClassName("fullscreenImagesG");
     let Max = imgNum[i-1] - 1;
+
+
+    const firstImgUrl = `../img/work/${i}-1.jpg`;
+    const secondImgUrl = `../img/work/${i}-2.jpg`;
+
+
     if(tempN != 0){
-        imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
-        imgG[1].children[0].src =`../img/work/${i}-${1}.jpg`;
-        imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
-        imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
-        setTimeout(() => {
+        try{
+            await preloadImage(firstImgUrl);
+
+            imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`; 
+            imgG[1].children[0].src = firstImgUrl; 
+
+            imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
+            imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
+
+            await new Promise(resolve => {
+                const targetElement = imgG[1].children[0]; 
+
+                const handleAnimationEnd = () => {
+                    targetElement.removeEventListener('animationend', handleAnimationEnd); 
+                    resolve();
+                };
+
+                targetElement.addEventListener('animationend', handleAnimationEnd);
+            });
+
             imgG[0].children[0].style.animation = "none";
             imgG[1].children[0].style.animation = "none";
-            imgG[0].children[0].src =`../img/work/${i}-${1}.jpg`;
-            imgG[1].children[0].src =`../img/work/${i}-${2}.jpg`;
-            tempN = 0;
-        }, 1000);
+            imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
+            imgG[1].children[0].src = `../img/work/${tempI}-${(tempN+1)%(Max + 1) + 1}.jpg`;
+            isSwitching = false;
+        }
+        catch (error){
+            console.error("輪播結束圖片載入失敗:", error.message);
+        }
     }
 }
 
@@ -1575,6 +1623,9 @@ function fullscreenCh(){
 
         }
         fullscrScrollBarContainer.appendChild(scrollDot);
+    }
+    if(tempN > 2){
+        fullscrScrollBarContainer.style.transform = `translateX(-${40*(tempN-2)}px)`;
     }
     fullscrPageNum.textContent = numberSwitch();
     setTimeout(() => {
@@ -1647,7 +1698,16 @@ function exitFullscr(){
     }, 2100);
 }
 
-function fullscrNextImg(){
+function preloadImage(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error(`圖片載入失敗: ${url}`));
+        img.src = url;
+    });
+}
+
+async function fullscrNextImg(){
     const imgG = document.getElementsByClassName("fullscreenImagesG");
     const scrollDot = document.getElementsByClassName("fullscrScrollDot");
     const fullscrScrollBarContainer = document.getElementById("fullscrScrollBarContainer");
@@ -1655,69 +1715,126 @@ function fullscrNextImg(){
 
 
     let Max = imgNum[tempI-1] - 1;
+
+    const nextN = (tempN + 1) % (Max + 1);
+    const nextImgUrl = `../img/work/${tempI}-${nextN + 1}.jpg`;
+
+    const nextNextN = (tempN + 2) % (Max + 1);
+    const nextNextImgUrl = `../img/work/${tempI}-${nextNextN + 1}.jpg`;
+
     if(!isSwitching){
         isSwitching = true;
-        imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
-        imgG[1].children[0].src = `../img/work/${tempI}-${(tempN+1)%(Max + 1) + 1}.jpg`;
-        imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
-        imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
-        tempN = (tempN+1)%(Max+1);
-        for(let i = 0; i < scrollDot.length; i++){
-            if(i != tempN)
-            scrollDot[i].classList.remove("fullscrScrollDotFocus");
-        }
-        if(tempN > 2){
-            fullscrScrollBarContainer.style.transform = `translateX(-${40*(tempN-2)}px)`;
-        }
-        else{
-            fullscrScrollBarContainer.style.transform = `translateX(0)`;
-        }
-        scrollDot[tempN].classList.add("fullscrScrollDotFocus");
-        fullscrPageNum.textContent = numberSwitch();
+        try{
+            imgG[1].children[0].src = nextNextImgUrl;
+            await preloadImage(nextImgUrl);
 
-        setTimeout(() => {
+            imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
+            imgG[1].children[0].src = nextImgUrl;
+
+            imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
+            imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
+
+            tempN = nextN;
+
+            for(let i = 0; i < scrollDot.length; i++){
+                if(i != tempN)
+                scrollDot[i].classList.remove("fullscrScrollDotFocus");
+            }
+            if(tempN > 2){
+                fullscrScrollBarContainer.style.transform = `translateX(-${40*(tempN-2)}px)`;
+            }
+            else{
+                fullscrScrollBarContainer.style.transform = `translateX(0)`;
+            }
+            scrollDot[tempN].classList.add("fullscrScrollDotFocus");
+            fullscrPageNum.textContent = numberSwitch();
+
+            await new Promise(resolve => {
+                const targetElement = imgG[1].children[0]; 
+
+                const handleAnimationEnd = () => {
+                    targetElement.removeEventListener('animationend', handleAnimationEnd); 
+                    resolve();
+                };
+
+                targetElement.addEventListener('animationend', handleAnimationEnd);
+            });
+
             imgG[0].children[0].style.animation = "none";
             imgG[1].children[0].style.animation = "none";
             imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
             imgG[1].children[0].src = `../img/work/${tempI}-${(tempN+1)%(Max + 1) + 1}.jpg`;
             isSwitching = false;
-        }, 1000);
+        }
+        catch (error){
+            console.error(error.message);
+            isSwitching = false;
+        }
     }
-
 }
 
-function fullscrPrevImg(){
+async function fullscrPrevImg(){
     const imgG = document.getElementsByClassName("fullscreenImagesG");
     const scrollDot = document.getElementsByClassName("fullscrScrollDot");
+    const fullscrScrollBarContainer = document.getElementById("fullscrScrollBarContainer");
     const fullscrPageNum = document.getElementById("fullscrPageNum");
 
 
     let Max = imgNum[tempI-1] - 1;
+
+    const prevN = (tempN - 1 + (Max + 1)) % (Max + 1);
+    const prevImgUrl = `../img/work/${tempI}-${prevN + 1}.jpg`;
+    
+    const prevPrevN = (tempN - 2 + (Max + 1)) % (Max + 1);
+    const prevPrevImgUrl = `../img/work/${tempI}-${prevPrevN + 1}.jpg`;
+
+    const currentN = tempN;
+    const currentImgUrl = `../img/work/${tempI}-${currentN + 1}.jpg`;
+
     if(!isSwitching){
         isSwitching = true;
-        imgG[1].children[0].src = `../img/work/${tempI}-${(tempN + (Max + 1))% (Max + 1) + 1}.jpg`;
-        imgG[0].children[0].src = `../img/work/${tempI}-${(tempN-1 + (Max + 1))% (Max + 1) + 1}.jpg`;
-        imgG[0].children[0].style.animation = "imagesLoop3 1s cubic-bezier(.4,0,.2,1)";
-        imgG[1].children[0].style.animation = "imagesLoop4 1s cubic-bezier(.4,0,.2,1)";
-        tempN = (tempN-1 + (Max+1))%(Max+1);
-        for(let i = 0; i < scrollDot.length; i++){
-            if(i != tempN)
-            scrollDot[i].classList.remove("fullscrScrollDotFocus");
-        }
-        if(tempN > 2){
-            fullscrScrollBarContainer.style.transform = `translateX(-${40*(tempN-2)}px)`;
-        }
-        else{
-            fullscrScrollBarContainer.style.transform = `translateX(0)`;
-        }
-        scrollDot[tempN].classList.add("fullscrScrollDotFocus");
-        fullscrPageNum.textContent = numberSwitch();
 
-        setTimeout(() => {
+        try{
+            
+            await preloadImage(prevImgUrl);
+            imgG[0].children[0].src = prevImgUrl; 
+            imgG[1].children[0].src = currentImgUrl; 
+            
+            imgG[0].children[0].style.animation = "imagesLoop3 1s cubic-bezier(.4,0,.2,1)";
+            imgG[1].children[0].style.animation = "imagesLoop4 1s cubic-bezier(.4,0,.2,1)";
+            
+            tempN = prevN;
+
+            for(let i = 0; i < scrollDot.length; i++){
+                if(i != tempN)
+                scrollDot[i].classList.remove("fullscrScrollDotFocus");
+            }
+            if(tempN > 2){
+                fullscrScrollBarContainer.style.transform = `translateX(-${40*(tempN-2)}px)`;
+            }
+            else{
+                fullscrScrollBarContainer.style.transform = `translateX(0)`;
+            }
+            scrollDot[tempN].classList.add("fullscrScrollDotFocus");
+            fullscrPageNum.textContent = numberSwitch();
+
+            await new Promise(resolve => {
+                const targetElement = imgG[0].children[0]; 
+                const handleAnimationEnd = () => {
+                    targetElement.removeEventListener('animationend', handleAnimationEnd); 
+                    resolve();
+                };
+                targetElement.addEventListener('animationend', handleAnimationEnd);
+            });
+            
             imgG[0].children[0].style.animation = "none";
             imgG[1].children[0].style.animation = "none";
             isSwitching = false;
-        }, 1000);
+        }
+        catch (error){
+            console.error(error.message);
+            isSwitching = false;
+        }
     }
 }
 
