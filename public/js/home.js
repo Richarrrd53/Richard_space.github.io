@@ -1583,6 +1583,7 @@ async function endingImgLoop(i){
 
 const fullscrBG = document.getElementById("fullscrBG");
 const bgText2 = document.getElementById("bgText2");
+const imgLoadingBG = document.getElementById("imgLoadingBG");
 
 function fullscreenCh(){
     clearInterval(imgLoopTimer);
@@ -1606,6 +1607,7 @@ function fullscreenCh(){
     fullscrScrollBarBG.style.display = "flex";
     fullscrScrollBarBG.addEventListener("mouseenter", () =>{showPageNum();});
     fullscrScrollBarBG.addEventListener("mouseleave", () =>{hidePageNum();});
+    imgLoadingBG.style.width = 1080/imgH*600 + "px";
 
     for(let i = 0; i < 2; i++){
         imgG[i].style.height = "1080px";
@@ -1674,6 +1676,7 @@ function exitFullscr(){
     fullscrScrollBarBG.style.opacity = 0;
     fullscrScrollBarBG.style.filter = "blur(30px)";
     fullscrScrollBarContainer.style.transform = `translateX(0px)`;
+    imgLoadingBG.style.width = 0 + "px";
 
     setTimeout(() => {
         fullscrBG.style.opacity = 0;
@@ -1725,8 +1728,11 @@ async function fullscrNextImg(){
     if(!isSwitching){
         isSwitching = true;
         try{
+            imgLoadingBG.style.display = "flex";
             imgG[1].children[0].src = nextNextImgUrl;
             await preloadImage(nextImgUrl);
+
+            imgLoadingBG.style.display = "none";
 
             imgG[0].children[0].src = `../img/work/${tempI}-${(tempN)%(Max + 1) + 1}.jpg`;
             imgG[1].children[0].src = nextImgUrl;
@@ -1784,9 +1790,6 @@ async function fullscrPrevImg(){
 
     const prevN = (tempN - 1 + (Max + 1)) % (Max + 1);
     const prevImgUrl = `../img/work/${tempI}-${prevN + 1}.jpg`;
-    
-    const prevPrevN = (tempN - 2 + (Max + 1)) % (Max + 1);
-    const prevPrevImgUrl = `../img/work/${tempI}-${prevPrevN + 1}.jpg`;
 
     const currentN = tempN;
     const currentImgUrl = `../img/work/${tempI}-${currentN + 1}.jpg`;
@@ -1795,10 +1798,13 @@ async function fullscrPrevImg(){
         isSwitching = true;
 
         try{
+            imgLoadingBG.style.display = "flex";
             
             await preloadImage(prevImgUrl);
             imgG[0].children[0].src = prevImgUrl; 
             imgG[1].children[0].src = currentImgUrl; 
+
+            imgLoadingBG.style.display = "none";
             
             imgG[0].children[0].style.animation = "imagesLoop3 1s cubic-bezier(.4,0,.2,1)";
             imgG[1].children[0].style.animation = "imagesLoop4 1s cubic-bezier(.4,0,.2,1)";
