@@ -327,7 +327,7 @@ function readmore(i) {
                 tempN = 0;
                 imgLoopTimer = setInterval(() => {
                     fullscreenImgLoop(i);
-                }, 3000);
+                }, 8000);
             }, 2000);
             break;
         case -2:
@@ -447,7 +447,7 @@ function readmore(i) {
                 tempN = 0;
                 imgLoopTimer = setInterval(() => {
                     fullscreenImgLoop(i);
-                }, 3000);
+                }, 8000);
             }, 2000);
             
             break;
@@ -569,7 +569,7 @@ function readmore(i) {
                 tempN = 0;
                 imgLoopTimer = setInterval(() => {
                     fullscreenImgLoop(i);
-                }, 3000);
+                }, 8000);
             }, 2000);
             break;
         case -4:
@@ -696,7 +696,7 @@ function readmore(i) {
                 tempN = 0;
                 imgLoopTimer = setInterval(() => {
                     fullscreenImgLoop(i);
-                }, 3000);
+                }, 8000);
             }, 2000);
             break;
     }
@@ -1478,7 +1478,7 @@ function nextBtnCh(i){
         tempN = 0;
         imgLoopTimer = setInterval(() => {
             fullscreenImgLoop(i+1);
-        }, 3000);
+        }, 8000);
         chContainer.style.transitionDuration = "0.1s";
         bg.style.transitionDuration = "0.5s";
         title.style.transitionDuration = "0.5s";
@@ -1497,6 +1497,8 @@ function nextBtnCh(i){
     }, 2300);
 }
 
+const imgLoadingBG = document.getElementById("imgLoadingBG");
+
 
 async function fullscreenImgLoop(i){
     const imgG = document.getElementsByClassName("fullscreenImagesG");
@@ -1508,7 +1510,11 @@ async function fullscreenImgLoop(i){
     const nextImgUrl = `../img/work/${tempI}-${nextN + 1}.jpg`;
 
     try{
+        imgLoadingBG.style.display = "flex";
+
         await preloadImage(nextImgUrl);
+
+        imgLoadingBG.style.display = "none";
 
         imgG[0].children[0].src = `../img/work/${tempI}-${currentN + 1}.jpg`; 
         imgG[1].children[0].src = nextImgUrl; 
@@ -1583,7 +1589,6 @@ async function endingImgLoop(i){
 
 const fullscrBG = document.getElementById("fullscrBG");
 const bgText2 = document.getElementById("bgText2");
-const imgLoadingBG = document.getElementById("imgLoadingBG");
 
 function fullscreenCh(){
     clearInterval(imgLoopTimer);
@@ -1688,7 +1693,7 @@ function exitFullscr(){
         
         imgLoopTimer = setInterval(() => {
             fullscreenImgLoop(tempI);
-        }, 3000);
+        }, 8000);
     }, 100);
     setTimeout(() => {
         closeBtn.style.display = "none";
