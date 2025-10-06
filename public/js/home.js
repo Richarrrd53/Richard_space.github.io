@@ -1502,7 +1502,10 @@ const imgLoadingBG = document.getElementById("imgLoadingBG");
 
 async function fullscreenImgLoop(i){
     const imgG = document.getElementsByClassName("fullscreenImagesG");
-    
+    imgLoadingBG.style.width = "600px";
+    imgLoadingBG.style.height = imgH + "px";
+    imgLoadingBG.style.borderRadius = "60px";
+    imgLoadingBG.style.transform = "translate(0%, -50%)";
     let Max = imgNum[i-1] - 1;
 
     const currentN = tempN;
@@ -1613,6 +1616,9 @@ function fullscreenCh(){
     fullscrScrollBarBG.addEventListener("mouseenter", () =>{showPageNum();});
     fullscrScrollBarBG.addEventListener("mouseleave", () =>{hidePageNum();});
     imgLoadingBG.style.width = 1080/imgH*600 + "px";
+    imgLoadingBG.style.height = 1080 + "px";
+    imgLoadingBG.style.borderRadius = "0px";
+    imgLoadingBG.style.transform = "translate(-50%, -50%)";
 
     for(let i = 0; i < 2; i++){
         imgG[i].style.height = "1080px";

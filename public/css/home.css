@@ -970,6 +970,7 @@ button:hover .button-text {
     font-family: "Noto Sans TC", sans-serif;
     font-weight: 400;
     font-size: 20px;
+    transition: all 1s cubic-bezier(.4,0,.2,1);
 }
 
 .dot-spinner {
