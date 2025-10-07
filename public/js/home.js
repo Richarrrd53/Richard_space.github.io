@@ -311,13 +311,14 @@ function readmore(i) {
                 }
                 content.style.opacity = 1;
                 content.style.filter = "blur(0)";
+                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
+                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
             }, 1600);
             setTimeout(() => {
                 fullscreenBtn.style.opacity = 1;
                 fullscreenBtn.style.filter = "blur(0)";
                 fullscreenImagesContainer.style.display = "flex";
-                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
-                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
+                
                 fullscreenImagesG[0].style.zIndex = imgNum[i-1]+7;
                 fullscreenImagesG[1].style.zIndex = imgNum[i-1]+8;
                 imgH = icon.children[0].offsetHeight;
@@ -431,13 +432,14 @@ function readmore(i) {
                 }
                 content.style.opacity = 1;
                 content.style.filter = "blur(0)";
+                
+                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
+                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
             }, 1600);
             setTimeout(() => {
                 fullscreenBtn.style.opacity = 1;
                 fullscreenBtn.style.filter = "blur(0)";
                 fullscreenImagesContainer.style.display = "flex";
-                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
-                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
                 fullscreenImagesG[0].style.zIndex = imgNum[i-1]+7;
                 fullscreenImagesG[1].style.zIndex = imgNum[i-1]+8;
                 imgH = icon.children[0].offsetHeight;
@@ -553,13 +555,13 @@ function readmore(i) {
                 }
                 content.style.opacity = 1;
                 content.style.filter = "blur(0)";
+                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
+                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
             }, 1600);
             setTimeout(() => {
                 fullscreenBtn.style.opacity = 1;
                 fullscreenBtn.style.filter = "blur(0)";
                 fullscreenImagesContainer.style.display = "flex";
-                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
-                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
                 fullscreenImagesG[0].style.zIndex = imgNum[i-1]+7;
                 fullscreenImagesG[1].style.zIndex = imgNum[i-1]+8;
                 imgH = icon.children[0].offsetHeight;
@@ -680,13 +682,13 @@ function readmore(i) {
                 }
                 content.style.opacity = 1;
                 content.style.filter = "blur(0)";
+                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
+                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
             }, 1600);
             setTimeout(() => {
                 fullscreenBtn.style.opacity = 1;
                 fullscreenBtn.style.filter = "blur(0)";
                 fullscreenImagesContainer.style.display = "flex";
-                fullscreenImagesG[0].children[0].src = `../img/work/${i}-1.jpg`;
-                fullscreenImagesG[1].children[0].src = `../img/work/${i}-1.jpg`;
                 fullscreenImagesG[0].style.zIndex = imgNum[i-1]+7;
                 fullscreenImagesG[1].style.zIndex = imgNum[i-1]+8;
                 imgH = icon.children[0].offsetHeight;
