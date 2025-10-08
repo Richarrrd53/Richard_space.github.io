@@ -1865,7 +1865,7 @@ async function fullscrPrevImg(){
 
 function numberSwitch(n){
     let newString = "";
-    if(n + 1 < 10){
+    if(n < 10){
         newString = `0${n}`;
     }
     else{
