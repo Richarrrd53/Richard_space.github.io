@@ -1875,13 +1875,15 @@ function numberSwitch(n){
 }
 
 function showPageNum(){
-    const fullscrScrollBarContainer = document.getElementById("fullscrScrollBarContainer");
-    const fullscrPageNum = document.getElementById("fullscrPageNum");
-
-    fullscrScrollBarContainer.style.opacity = 0;
-    fullscrScrollBarContainer.style.filter = "blur(15px)";
-    fullscrPageNum.style.opacity = 1;
-    fullscrPageNum.style.filter = "blur(0px)";
+    if(!isTypingPageNum){
+        const fullscrScrollBarContainer = document.getElementById("fullscrScrollBarContainer");
+        const fullscrPageNum = document.getElementById("fullscrPageNum");
+    
+        fullscrScrollBarContainer.style.opacity = 0;
+        fullscrScrollBarContainer.style.filter = "blur(15px)";
+        fullscrPageNum.style.opacity = 1;
+        fullscrPageNum.style.filter = "blur(0px)";
+    }
 }
 const pageNumInput = document.getElementById("pageNumInput");
 let isTypingPageNum;
