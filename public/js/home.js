@@ -1595,6 +1595,8 @@ async function endingImgLoop(i){
 const fullscrBG = document.getElementById("fullscrBG");
 const bgText2 = document.getElementById("bgText2");
 
+
+
 function fullscreenCh(){
     clearInterval(imgLoopTimer);
     fullscrBG.style.display = "block";
@@ -1642,7 +1644,8 @@ function fullscreenCh(){
     if(tempN > 2){
         fullscrScrollBarContainer.style.transform = `translateX(-${40*(tempN-2)}px)`;
     }
-    fullscrPageNum.textContent = numberSwitch();
+    fullscrPageNum.children[0].textContent = numberSwitch(tempN+1);
+    fullscrPageNum.children[2].textContent = numberSwitch(imgNum[tempI - 1]);
     setTimeout(() => {
         closeBtn.style.opacity = 1;
         closeBtn.style.filter = "blur(0px)";
@@ -1690,6 +1693,7 @@ function exitFullscr(){
     fullscrScrollBarBG.style.filter = "blur(30px)";
     fullscrScrollBarContainer.style.transform = `translateX(0px)`;
     imgLoadingBG.style.width = 0 + "px";
+    hidePageNumInput();
 
     setTimeout(() => {
         fullscrBG.style.opacity = 0;
@@ -1766,7 +1770,8 @@ async function fullscrNextImg(){
                 fullscrScrollBarContainer.style.transform = `translateX(0)`;
             }
             scrollDot[tempN].classList.add("fullscrScrollDotFocus");
-            fullscrPageNum.textContent = numberSwitch();
+            fullscrPageNum.children[0].textContent = numberSwitch(tempN+1);
+            fullscrPageNum.children[2].textContent = numberSwitch(imgNum[tempI - 1]);
 
             await new Promise(resolve => {
                 const targetElement = imgG[1].children[0]; 
@@ -1835,7 +1840,8 @@ async function fullscrPrevImg(){
                 fullscrScrollBarContainer.style.transform = `translateX(0)`;
             }
             scrollDot[tempN].classList.add("fullscrScrollDotFocus");
-            fullscrPageNum.textContent = numberSwitch();
+            fullscrPageNum.children[0].textContent = numberSwitch(tempN+1);
+            fullscrPageNum.children[2].textContent = numberSwitch(imgNum[tempI - 1]);
 
             await new Promise(resolve => {
                 const targetElement = imgG[0].children[0]; 
@@ -1857,21 +1863,13 @@ async function fullscrPrevImg(){
     }
 }
 
-function numberSwitch(){
+function numberSwitch(n){
     let newString = "";
-    let Max = imgNum[tempI-1];
-    let MaxString;
-    if(Max < 10){
-        MaxString = `0${Max}`;
+    if(n + 1 < 10){
+        newString = `0${n}`;
     }
     else{
-        MaxString = `${Max}`;
-    }
-    if(tempN + 1 < 10){
-        newString = `0${tempN+1} / ${MaxString}`;
-    }
-    else{
-        newString = `${tempN+1} / ${MaxString}`;
+        newString = `${n}`;
     }
     return newString;
 }
@@ -1885,13 +1883,223 @@ function showPageNum(){
     fullscrPageNum.style.opacity = 1;
     fullscrPageNum.style.filter = "blur(0px)";
 }
+const pageNumInput = document.getElementById("pageNumInput");
+let isTypingPageNum;
 
 function hidePageNum(){
     const fullscrScrollBarContainer = document.getElementById("fullscrScrollBarContainer");
     const fullscrPageNum = document.getElementById("fullscrPageNum");
+    
+    if(!isTypingPageNum){
+        fullscrScrollBarContainer.style.opacity = 1;
+        fullscrScrollBarContainer.style.filter = "blur(0px)";
+        fullscrPageNum.style.opacity = 0;
+        fullscrPageNum.style.filter = "blur(15px)";
+        pageNumInput.style.opacity = 0;
+        pageNumInput.style.filter = "blur(15px)";
+        pageNumInput.removeAttribute("disabled");
+    }
+}
 
-    fullscrScrollBarContainer.style.opacity = 1;
-    fullscrScrollBarContainer.style.filter = "blur(0px)";
+const fullscrScrollBarBG = document.getElementById("fullscrScrollBarBG");
+let tempValue = tempN + 1;
+
+
+function showPageNumInput(){
+    const fullscrPageNum = document.getElementById("fullscrPageNum");
     fullscrPageNum.style.opacity = 0;
     fullscrPageNum.style.filter = "blur(15px)";
+    pageNumInput.style.opacity = 1;
+    pageNumInput.style.filter = "blur(0px)";
+    fullscrScrollBarBG.classList.add("open");
+    fullscrScrollBarBG.style.transform = "translateY(-740px) scale(1.5)";
+    tempValue = tempN + 1;
 }
+
+function hidePageNumInput(){
+    const fullscrPageNum = document.getElementById("fullscrPageNum");
+    fullscrPageNum.style.opacity = 1;
+    fullscrPageNum.style.filter = "blur(0px)";
+    pageNumInput.style.opacity = 0;
+    pageNumInput.style.filter = "blur(15px)";
+    fullscrScrollBarBG.classList.remove("open");
+    fullscrScrollBarBG.style.transform = "";
+    closeKeyboard();
+    isTypingPageNum = false;
+    pageNumInput.setAttribute("disabled", false);
+    hidePageNum();
+}
+
+function openKeyboard(){
+    const keyboard = document.getElementById("pageNumKeyboard");
+    keyboard.style.scale = "1 1";
+    keyboard.style.transform = "translate(-50%, -200px)";
+    keyboard.style.filter = "blur(0)";
+    const keys = document.getElementsByClassName("key");
+    for(let i = 0; i < keys.length; i++){
+        keys[i].onmouseenter = (e) => {keyboardKeyHover(e, i)};
+        keys[i].onmousemove = (e) => {keyboardKeyHover(e, i)};
+        keys[i].onmouseleave = () => {keyboardKeyLeave(i)};
+    }
+}
+
+function keyboardKeyHover(e, i){
+    const keyLight = document.getElementsByClassName("keyLight");
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    keyLight[i].style.opacity = 0.5;
+    keyLight[i].style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function keyboardKeyLeave(i){
+    const keyLight = document.getElementsByClassName("keyLight");
+    keyLight[i].style.opacity = 0;
+
+}
+
+
+function typePageNum(e){
+    const Max = imgNum[tempI -1];
+    const Min = 1;
+
+    if(e == "a"){
+        tempValue = Math.floor(tempValue/10);
+        if(tempValue > Max){
+            tempValue = Max;
+        }
+        if(tempValue < Min){
+            tempValue = Min;
+        }
+        pageNumInput.value = `${numberSwitch(tempValue)} / ${numberSwitch(Max)}`;
+    }
+    else if(e == "b"){
+        if(tempValue > Max){
+            tempValue = Max;
+        }
+        if(tempValue < Min){
+            tempValue = Min;
+        }
+        pageNumInput.value = `${numberSwitch(tempValue)} / ${numberSwitch(Max)}`;
+        fullscrSwitchTo(tempValue);
+        hidePageNumInput();
+    }
+    else{
+        if(tempValue == Min){
+            tempValue = (tempValue*0 + parseInt(e))%100;
+        }
+        else{
+            tempValue = (tempValue*10 + parseInt(e))%100;
+        }
+        if(tempValue > Max){
+            tempValue = Max;
+        }
+        if(tempValue < Min){
+            tempValue = Min;
+        }
+        pageNumInput.value = `${numberSwitch(tempValue)} / ${numberSwitch(Max)}`;
+    }
+}
+
+async function fullscrSwitchTo(targetIndex){
+    const imgG = document.getElementsByClassName("fullscreenImagesG");
+    const scrollDot = document.getElementsByClassName("fullscrScrollDot");
+    const fullscrScrollBarContainer = document.getElementById("fullscrScrollBarContainer");
+    const fullscrPageNum = document.getElementById("fullscrPageNum");
+
+    const Max = imgNum[tempI - 1] - 1;
+    const targetN = targetIndex - 1;
+
+    if (targetN === tempN) {
+        return;
+    }
+    if (!isSwitching) {
+        isSwitching = true;
+
+        try {
+            imgLoadingBG.style.display = "flex";
+
+            const targetImgUrl = `../img/work/${tempI}-${targetN + 1}.jpg`;
+            const currentImgUrl = `../img/work/${tempI}-${tempN + 1}.jpg`;
+
+            await preloadImage(targetImgUrl);
+
+            imgLoadingBG.style.display = "none";
+
+            const isForward = targetN > tempN;
+
+            if (isForward) {
+                imgG[0].children[0].src = currentImgUrl;
+                imgG[1].children[0].src = targetImgUrl;
+
+                imgG[0].children[0].style.animation = "imagesLoop1 1s cubic-bezier(.4,0,.2,1)";
+                imgG[1].children[0].style.animation = "imagesLoop2 1s cubic-bezier(.4,0,.2,1)";
+            } else {
+                imgG[0].children[0].src = targetImgUrl;
+                imgG[1].children[0].src = currentImgUrl;
+
+                imgG[0].children[0].style.animation = "imagesLoop3 1s cubic-bezier(.4,0,.2,1)";
+                imgG[1].children[0].style.animation = "imagesLoop4 1s cubic-bezier(.4,0,.2,1)";
+            }
+
+            tempN = targetN;
+
+            for (let i = 0; i < scrollDot.length; i++) {
+                if (i != tempN) {
+                    scrollDot[i].classList.remove("fullscrScrollDotFocus");
+                }
+            }
+
+            if (tempN > 2) {
+                fullscrScrollBarContainer.style.transform = `translateX(-${40 * (tempN - 2)}px)`;
+            } else {
+                fullscrScrollBarContainer.style.transform = `translateX(0)`;
+            }
+
+            scrollDot[tempN].classList.add("fullscrScrollDotFocus");
+            fullscrPageNum.children[0].textContent = numberSwitch(tempN + 1);
+            fullscrPageNum.children[2].textContent = numberSwitch(imgNum[tempI - 1]);
+
+            await new Promise(resolve => {
+                const targetElement = isForward ? imgG[1].children[0] : imgG[0].children[0];
+
+                const handleAnimationEnd = () => {
+                    targetElement.removeEventListener('animationend', handleAnimationEnd);
+                    resolve();
+                };
+
+                targetElement.addEventListener('animationend', handleAnimationEnd);
+            });
+
+            imgG[0].children[0].style.animation = "none";
+            imgG[1].children[0].style.animation = "none";
+            imgG[0].children[0].src = `../img/work/${tempI}-${tempN + 1}.jpg`;
+            imgG[1].children[0].src = `../img/work/${tempI}-${(tempN + 1) % (Max + 1) + 1}.jpg`;
+
+            isSwitching = false;
+        } catch (error) {
+            console.error(error.message);
+            isSwitching = false;
+        }
+    }
+}
+
+function closeKeyboard(){
+    const keyboard = document.getElementById("pageNumKeyboard");
+    keyboard.style.scale = "0.5 3";
+    keyboard.style.transform = "translate(-75%, 600px)";
+    keyboard.style.filter = "blur(10px)";
+}
+
+fullscrScrollBarBG.addEventListener("click", () => {
+    isTypingPageNum = true;
+    showPageNumInput();
+    openKeyboard();
+    pageNumInput.setAttribute("disabled", true);
+    pageNumInput.value = `${numberSwitch(tempN+1)} / ${numberSwitch(imgNum[tempI-1])}`;
+});
+
+pageNumInput.addEventListener("blur", () => {
+
+});

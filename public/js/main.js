@@ -138,10 +138,10 @@ function stinger(){
     const stingerLine20 = document.createElement("div");
     const stingerSound = document.createElement("audio");
 
-    wave11.src = "../img/wave.svg";
-    wave12.src = "../img/wave.svg";
-    wave21.src = "../img/wave-2.svg";
-    wave22.src = "../img/wave-2.svg";
+    wave11.src = "../img/icon/wave.svg";
+    wave12.src = "../img/icon/wave.svg";
+    wave21.src = "../img/icon/wave-2.svg";
+    wave22.src = "../img/icon/wave-2.svg";
     stingerSound.src = "../sound/transition.mp3";
 
     stinger.classList.add("stinger");
