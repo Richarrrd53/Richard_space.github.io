@@ -1986,7 +1986,7 @@ function typePageNum(e){
         hidePageNumInput();
     }
     else{
-        if(tempValue == Min){
+        if(tempValue == Min && e != 1 & e != 0){
             tempValue = (tempValue*0 + parseInt(e))%100;
         }
         else{
