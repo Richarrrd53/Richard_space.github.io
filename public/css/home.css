@@ -539,15 +539,16 @@ button.continueBtn .button-text {
     opacity: 0;
     filter: blur(10px);
     width: 800px;
-    height: 800px;
+    height: 600px;
     position: absolute;
     font-family: "Noto Sans TC", sans-serif;
     margin-left: 980px;
-    margin-top: 450px;
+    margin-top: 250px;
     font-size: 24px;
     transition: all 1s cubic-bezier(.4,0,.2,1);
     letter-spacing: 2px;
     z-index: 5;
+    overflow-y: scroll;
 }
 
 #menuScroller{
