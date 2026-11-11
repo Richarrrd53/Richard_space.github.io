@@ -20,3 +20,15 @@ HOST=0.0.0.0 PORT=3000 pm2 start ecosystem.config.cjs --update-env
 變更環境變數後，使用 `HOST=0.0.0.0 PORT=3000 pm2 restart richards-space --update-env`，再執行 `pm2 save`。直接對外連線時，需依主機的防火牆與網路政策開放對應埠號。
 
 可用 `curl http://127.0.0.1:3000/get-islocalhost` 檢查服務，並使用 `pm2 status`、`pm2 logs richards-space` 查看狀態和日誌。
+
+## 透過 Apache 部署在 /app/
+
+在 HTTPS 的 VirtualHost 中，將整個 `/app/` 轉送給 Node.js（需要啟用 Apache 的 proxy 和 proxy_http 模組）：
+
+```apache
+RedirectMatch ^/app$ /app/
+ProxyPass /app/ http://127.0.0.1:3000/
+ProxyPassReverse /app/ http://127.0.0.1:3000/
+```
+
+檢查設定後重新載入 Apache，並確認 `curl https://你的網域/app/get-islocalhost` 回傳 `islocalhost`。請保留 `/app/` 結尾的斜線；反向代理必須轉送靜態檔案及 API，不能只提供靜態目錄。更新程式碼後執行 `pm2 restart richards-space`。

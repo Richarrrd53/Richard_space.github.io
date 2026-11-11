@@ -157,7 +157,8 @@ chContainer.addEventListener("wheel", (e) => {
 
 async function loadContent(content, i) {
     try {
-        const response = await fetch(`/get-content/${i}`);
+        const response = await fetch(`../get-content/${i}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const text = await response.text();
         content.innerText = text;
     } catch (error) {

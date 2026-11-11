@@ -1,12 +1,12 @@
 const ifm = document.createElement("iframe");
 ifm.id = "ifm";
-ifm.src = "../html/start.html";
+ifm.src = "./html/start.html";
 document.body.appendChild(ifm);
 let isLocalhost;
 
 async function getIslocalhost() {
     try {
-        const response = await fetch(`/get-islocalhost`);
+        const response = await fetch('./get-islocalhost');
         const text = await response.text();
         if(text == "islocalhost"){
             isLocalhost = true;
@@ -138,11 +138,11 @@ function stinger(){
     const stingerLine20 = document.createElement("div");
     const stingerSound = document.createElement("audio");
 
-    wave11.src = "../img/icon/wave.svg";
-    wave12.src = "../img/icon/wave.svg";
-    wave21.src = "../img/icon/wave-2.svg";
-    wave22.src = "../img/icon/wave-2.svg";
-    stingerSound.src = "../sound/transition.mp3";
+    wave11.src = "./img/icon/wave.svg";
+    wave12.src = "./img/icon/wave.svg";
+    wave21.src = "./img/icon/wave-2.svg";
+    wave22.src = "./img/icon/wave-2.svg";
+    stingerSound.src = "./sound/transition.mp3";
 
     stinger.classList.add("stinger");
     wave11.classList.add("wave1");
@@ -242,7 +242,7 @@ let stingerTime = 1000;
 function changeHtml(html){
     stinger();
     setTimeout(() => {
-        ifm.src = `../html/${html}.html`;
+        ifm.src = `./html/${html}.html`;
     }, stingerTime);
 }
 
